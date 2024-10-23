@@ -28,11 +28,11 @@ class LoginController extends Controller
         // Attempt login
         if (!Auth::attempt(['email' => $request->email, 'password'=> $request->password])) {
             return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+                'email' => 'The provided credentials do not match our records.'
             ]);
         }
 
-        // If login is successful
+        // If login is successful enviamos peticion http a dashboard con método get
         return redirect()->intended('dashboard');
 
     }

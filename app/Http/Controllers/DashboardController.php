@@ -10,11 +10,15 @@ class DashboardController extends Controller
     public function index()
     {
         
-        // Get the currently authenticated user
-        $user = Auth::user();
-
-        // Pass the user data to the dashboard view
-        return view('dashboard', compact('user'));
+        if (Auth::user()->role === 'admin') {
+            return view('admin.dashboard'); // Admin dashboard
+        } else if(Auth::user()->role === 'employee') {
+            return view('employee.dashboard'); // Employee dashboard
+        }else{
+            return abort(403); // Unauthorized access
+        }
+    
+       
         
     }
 }
