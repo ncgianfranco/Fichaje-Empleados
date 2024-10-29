@@ -2,19 +2,28 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\AttendanceLog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function dashboard()
     {
-        // Employee-specific logic and data
-        return view('employee.dashboard');
+        $employee = Auth::user();
+        $attendanceRecords = AttendanceLog::where('user_id', $employee->id)->get();
+        return view('employee.dashboard', compact('attendanceRecords'));
+    }
+    
+    public function checkIn()
+    {
+        // Logic for employee check-in
     }
 
-    public function viewTimesheet()
+    public function checkOut()
     {
-        // Logic to view employee timesheet
-        return view('employee.timesheet');
+        // Logic for employee check-out
     }
+
+
 }

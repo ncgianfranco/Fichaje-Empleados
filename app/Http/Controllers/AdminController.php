@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\AttendanceLog;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        // Admin-specific logic and data
-        return view('admin.dashboard');
+        $employees = User::where('role', 'employee')->get(); // Fetch all employees
+        $attendanceRecords = AttendanceLog::all(); // Fetch all attendance records
+        return view('admin.dashboard', compact('employees', 'attendanceRecords'));
     }
 
-    public function manageUsers()
-    {
-        // Logic to manage employees
-        return view('admin.manageUsers');
-    }
 }
