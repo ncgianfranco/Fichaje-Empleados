@@ -6,8 +6,8 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
-use App\Models\AdminController;
-use App\Models\EmployeeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmployeeController;
 use App\Models\LeaveRequest;
 
 //rutas para la raiz
@@ -28,17 +28,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 // Admin routes
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/manage-users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
-});
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 
 // Employee routes
-Route::group(['middleware' => ['auth', 'role:employee']], function () {
-    Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
-    Route::get('/employee/timesheet', [EmployeeController::class, 'viewTimesheet'])->name('employee.timesheet');
-});
-
+Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard')->middleware('auth');
 
 /*
 Route::group(['middleware' => 'auth'], function() {

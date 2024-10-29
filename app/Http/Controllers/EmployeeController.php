@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-use Illuminate\Database\Eloquent\Model;
-
-class EmployeeController extends Model
+class EmployeeController extends Controller
 {
     public function dashboard()
     {
