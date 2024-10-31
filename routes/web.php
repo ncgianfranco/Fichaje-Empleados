@@ -35,6 +35,7 @@ Route::post('/admin/employee/add', [AdminController::class, 'storeEmployee'])->n
 
 Route::get('/admin/employee/{id}/edit', [AdminController::class, 'editEmployee'])->name('admin.editEmployee');
 Route::put('/admin/employee/{id}', [AdminController::class, 'updateEmployee'])->name('admin.updateEmployee');
+
 Route::delete('/admin/employee/{id}', [AdminController::class, 'deleteEmployee'])->name('admin.deleteEmployee');
 
 Route::get('/admin/leave-requests', [AdminController::class, 'viewLeaveRequests'])->name('admin.leaveRequests');
@@ -45,6 +46,7 @@ Route::put('/admin/leave-requests/{id}', [AdminController::class, 'updateLeaveSt
 Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard')->middleware('auth');
 Route::post('/employee/check-in', [EmployeeController::class, 'checkIn'])->name('employee.checkin');
 Route::post('/employee/check-out', [EmployeeController::class, 'checkOut'])->name('employee.checkout');
+
 Route::get('/employee/request-leave', [EmployeeController::class, 'showRequestLeaveForm'])->name('employee.showRequestLeave');
 Route::post('/employee/request-leave', [EmployeeController::class, 'requestLeave'])->name('employee.requestLeave');
 Route::get('/employee/leave-requests', [EmployeeController::class, 'viewLeaveRequests'])->name('employee.leaveRequests');
