@@ -93,7 +93,20 @@ class AdminController extends Controller
         $leaveRequest->status = $request->status;
         $leaveRequest->save();
 
+        //Actualizamos el campo días gastados si fue rechazada (cuando el empleado hace una petición de vacaciones, cuentan como días gastados a pesar de no haber sido aprobados aún)
+        if($request->status == "rejected"){
+            //Calculamos cantidad de días solicitados
+            $leaveStartDate = \Carbon\Carbon::parse($leaveRequest->start_date);
+            $leaveEndDate = $leaveRequest->end_date;
+    
+            $days_requested = ($leaveStartDate->diffInWeekdays($leaveEndDate, true));
+            $days_requested++;
+    
+            //Actualizamos los días gastados del usuario (en este caso, le devolvemos los días puesto que ha sido rechazada)
+            User::findOrFail($leaveRequest->user_id)->decrement('spent_holidays', $days_requested);
+        }
+
         // Redirect back with a success message
-        return redirect()->route('admin.leaveRequests')->with('success', 'Leave request status updated successfully.');
+        return redirect()->route('admin.leaveRequests')->with('success', 'Leave request status updated successfully');
     }
 }

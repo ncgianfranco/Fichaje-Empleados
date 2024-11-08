@@ -20,6 +20,10 @@
         </div>
     @endif
 
+    <p>Your contract started on {{ $start_date }}</p>
+
+    <p>Since then you have generated {{ $totalHolidays}} holidays. You have spent (or pending to approve) {{ $spent_holidays }} of them</p>
+
     <!-- Leave Request Form -->
     <form action="{{ route('employee.requestLeave') }}" method="POST">
         @csrf
