@@ -1,7 +1,7 @@
 <!-- resources/views/admin/leaveRequests.blade.php -->
 @extends('layouts.app')
 
-@section('title-name', 'Requests)
+@section('title-name', 'Requests')
 
 @section('content')
 <div class="container">
