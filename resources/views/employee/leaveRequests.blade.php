@@ -1,6 +1,8 @@
 <!-- resources/views/employee/leaveRequests.blade.php -->
 @extends('layouts.app')
 
+@section('title-name', 'Requests')
+
 @section('content')
 <div class="container">
     <h2>Your Leave Requests</h2>

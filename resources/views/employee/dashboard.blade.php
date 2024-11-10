@@ -1,6 +1,8 @@
 <!-- resources/views/employee/dashboard.blade.php -->
 @extends('layouts.app')
 
+@section('title-name', 'Dashboard')
+
 @section('content')
 <div class="container">
     <h2>Employee Dashboard</h2>

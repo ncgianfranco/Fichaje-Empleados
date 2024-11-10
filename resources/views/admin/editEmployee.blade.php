@@ -1,6 +1,8 @@
 <!-- resources/views/admin/editEmployee.blade.php -->
 @extends('layouts.app')
 
+@section('title-name', 'Edit Employee')
+
 @section('content')
 <div class="container">
     <h2>Edit Employee</h2>
