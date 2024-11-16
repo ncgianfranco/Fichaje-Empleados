@@ -50,6 +50,7 @@ Route::post('/employee/check-out', [EmployeeController::class, 'checkOut'])->nam
 Route::get('/employee/request-leave', [EmployeeController::class, 'showRequestLeaveForm'])->name('employee.showRequestLeave');
 Route::post('/employee/request-leave', [EmployeeController::class, 'requestLeave'])->name('employee.requestLeave');
 Route::get('/employee/leave-requests', [EmployeeController::class, 'viewLeaveRequests'])->name('employee.leaveRequests');
+Route::delete('/employee/leave-requests/{id}', [EmployeeController::class, 'deleteLeaveRequest'])->name('employee.deleteLeaveRequest');
 
 /*
 Route::group(['middleware' => 'auth'], function() {

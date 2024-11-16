@@ -7,6 +7,10 @@
 <div class="container">
     <h2>Your Leave Requests</h2>
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     @if($leaveRequests->isEmpty())
         <p>You have no leave requests.</p>
     @else
@@ -36,6 +40,13 @@
                             @endif
                         </td>
                         <td>{{ $request->created_at->format('Y-m-d') }}</td>
+                        <td>
+                            <form action="{{ route('employee.deleteLeaveRequest', $request->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="Cancelar">
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

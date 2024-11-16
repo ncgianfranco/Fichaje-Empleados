@@ -137,5 +137,21 @@ class EmployeeController extends Controller
         return view('employee.leaveRequests', compact('leaveRequests'));
     }
 
+    //Devolvemos los días de la petición cancelada al usuario y la borramos
+    public function deleteLeaveRequest($id) {
+        $request = LeaveRequest::findOrFail($id);
+
+        //Devolvemos al usuario los días que gastó en esta petición
+        $days_requested = \Carbon\Carbon::parse($request->start_date)->diffInWeekdays($request->end_date);
+        $days_requested++;
+
+        $employee = User::findOrFail($request->user_id);
+
+        $employee->decrement('spent_holidays', $days_requested);
+
+        $request->delete();
+
+        return redirect()->route('employee.leaveRequests')->with('success', 'Request deleted successfully.');
+    }
 
 }
