@@ -109,4 +109,13 @@ class AdminController extends Controller
         // Redirect back with a success message
         return redirect()->route('admin.leaveRequests')->with('success', 'Leave request status updated successfully');
     }
+
+    public function searchEmployeeRequests(Request $request) {
+        // Filtra requests por email de usuario
+        $user_id = User::select('id')->where('email', 'like', '%' . $request->employee_email . '%');
+
+        $leaveRequests = LeaveRequest::with('user')->whereIn('user_id', $user_id)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.leaveRequests', compact('leaveRequests'));
+    }
 }

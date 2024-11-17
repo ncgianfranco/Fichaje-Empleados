@@ -40,6 +40,7 @@ Route::delete('/admin/employee/{id}', [AdminController::class, 'deleteEmployee']
 
 Route::get('/admin/leave-requests', [AdminController::class, 'viewLeaveRequests'])->name('admin.leaveRequests');
 Route::put('/admin/leave-requests/{id}', [AdminController::class, 'updateLeaveStatus'])->name('admin.updateLeaveStatus');
+Route::get('/admin/leave-requests/search', [AdminController::class, 'searchEmployeeRequests'])->name('admin.leaveRequestsSearch');
 
 
 // Employee routes

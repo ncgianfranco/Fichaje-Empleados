@@ -7,6 +7,13 @@
 <div class="container">
     <h2>Employee Leave Requests</h2>
 
+    <form action="{{ route('admin.leaveRequestsSearch') }}" method="get">
+        @csrf
+        <label for="employee_email">Employee email:</label>
+        <input type="text" id="employee_email" name="employee_email">
+        <button type="submit"  name="employee_email_button">Search</button>
+    </form>
+
     @if($leaveRequests->isEmpty())
         <p>No leave requests available.</p>
     @else
