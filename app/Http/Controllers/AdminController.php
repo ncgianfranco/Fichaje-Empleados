@@ -12,10 +12,13 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
+        
         $employees = User::where('role', 'employee')->get(); // Fetch all employees
+        // Obtén la fecha de hoy
+        $today = now()->toDateString(); // 'Y-m-d' formato de la fecha de hoy
 
         // Fetch attendance logs along with associated user details
-        $attendanceRecords = AttendanceLog::with('user')->orderBy('clock_in_time', 'desc')->get();
+        $attendanceRecords = AttendanceLog::whereDate('clock_in_time', $today)->get();
         return view('admin.dashboard', compact('employees', 'attendanceRecords'));
     }
 
@@ -117,5 +120,54 @@ class AdminController extends Controller
         $leaveRequests = LeaveRequest::with('user')->whereIn('user_id', $user_id)->orderBy('created_at', 'desc')->get();
 
         return view('admin.leaveRequests', compact('leaveRequests'));
+    }
+
+    //MÉTODOS PARA LAS VISTA DE RENDIMIENTO -> BY GIANFRANCO
+    
+    public function viewPerformance(){
+        //retorna la vista performance sin datos filtrados
+        return view('admin.performance', ['logs' => [], 'filtered' => false]);
+    }
+
+    public function filterPerformance(Request $request)
+    {
+        $query = AttendanceLog::query();
+
+        // Si no se envía ningún filtro, devuelve una vista vacía
+        if (!$request->hasAny(['email', 'start_date', 'end_date']) || 
+            (!$request->email && !$request->start_date && !$request->end_date)) {
+            return view('admin.performance', [
+                'logs' => collect(), // Colección vacía
+                'filtered' => false, // Indica que no hay filtros aplicados
+            ]);
+        }
+
+        // Filtrado por correo electrónico del empleado si se proporciona
+        if ($request->has('email') && $request->email) {
+            $user = User::where('email', $request->email)->first();
+            if ($user) {
+                $query->where('user_id', $user->id);
+            } else {
+                return redirect()->route('admin.performance')
+                    ->with('error', 'No se encontraron registros para el correo proporcionado.');
+            }
+        }
+
+        // Filtrado por rango de fechas si se proporciona
+        if ($request->has('start_date') && $request->start_date && 
+            $request->has('end_date') && $request->end_date) {
+            $query->whereBetween('clock_in_time', [$request->start_date, $request->end_date]);
+        }
+
+        // Obtiene los registros filtrados
+        $logs = $query->orderBy('clock_in_time', 'desc')->get();
+
+        // Retorna la vista de rendimiento con los registros filtrados
+        return view('admin.performance', [
+            'logs' => $logs,
+            'filtered' => true,
+            'filters' => $request->only(['email', 'start_date', 'end_date']), // Para mantener los valores del formulario
+        ]);
+
     }
 }

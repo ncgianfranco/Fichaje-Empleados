@@ -21,7 +21,7 @@
         <tbody>
             @foreach($attendanceRecords as $record)
                 <tr>
-                    <td>{{ $record->created_at->toDateString() }}</td>
+                    <td>{{ $record->created_at}}</td>
                     <td>{{ $record->clock_in_time }}</td>
                     <td>{{ $record->clock_out_time }}</td>
                 </tr>

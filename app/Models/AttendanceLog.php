@@ -11,6 +11,10 @@ class AttendanceLog extends Model
         'user_id',
  
     ];
+    protected $casts = [
+        'clock_in_time' => 'datetime',
+        'clock_out_time' => 'datetime',
+    ];
 
     // In AttendanceLog.php
     public function user()

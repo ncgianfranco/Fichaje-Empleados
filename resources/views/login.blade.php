@@ -34,7 +34,7 @@
                 </div>
                 <div class="row flex justify-content-center mb-3">
                     <div class="col-lg-6 text-center">
-                        <p class="link-underline"> ¿No estás registrado? <a class="link-underline link-underline-opacity-0 link-offset-3-hover link-underline-opacity-75-hover" href="{{ route('register')}}"> Regístrate </a></p>
+                        <p class="link-underline"> ¿Olvidaste tu contraseña? <a class="link-underline link-underline-opacity-0 link-offset-3-hover link-underline-opacity-75-hover" href="{{ route('password.request')}}"> Recuperar contraseña </a></p>
                     </div>
                 </div>
             </div>

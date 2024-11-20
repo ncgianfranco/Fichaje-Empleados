@@ -9,8 +9,9 @@
 
     <!-- Employee Management Section -->
     <h3>Manage Employees</h3>
-
+    <a href="{{ route('admin.leaveRequests') }}" class="btn btn-primary">Go to view request of employees</a>
     <a href="{{ route('admin.addEmployee') }}" class="btn btn-primary">Add New Employee</a>
+    <a href="{{ route('admin.performance') }}" class="btn btn-primary">Ver Rendimiento de Empleados</a>
 
     <table class="table">
         <thead>
@@ -42,25 +43,31 @@
 
     <!-- Attendance Records Section -->
     <h3>Attendance Records</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Employee</th>
-                <th>Clock In</th>
-                <th>Clock Out</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($attendanceRecords as $record)
+
+    @if($attendanceRecords->isEmpty())
+        <p>No hay fichajes registrados para hoy.</p>
+    @else
+
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ $record->user->name }}</td>
-                    <td>{{ $record->clock_in_time }}</td>
-                    <td>{{ $record->clock_out_time }}</td>
+                    <th>Employee</th>
+                    <th>Clock In</th>
+                    <th>Clock Out</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <a href="{{ route('admin.leaveRequests') }}" class="btn btn-primary">Go to view request of employees</a>
+            </thead>
+            <tbody>
+                @foreach($attendanceRecords as $record)
+                    <tr>
+                        <td>{{ $record->user->name }}</td>
+                        <td>{{ $record->clock_in_time->format('H:i') }}</td>
+                        <td>{{ $record->clock_out_time ? $record->clock_out_time->format('H:i') : 'N/A' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        
+    @endif
 </div>
 @endsection
 

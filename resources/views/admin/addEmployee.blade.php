@@ -37,3 +37,4 @@
 
     <button type="submit">Crear Empleado</button>
 </form>
+@endsection
