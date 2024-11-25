@@ -1,5 +1,6 @@
 <!-- resources/views/employee/dashboard.blade.php -->
 @extends('layouts.app')
+@extends('employee.employee-layouts.employee-menu')
 
 @section('title-name', 'Dashboard')
 
@@ -9,7 +10,6 @@
 
     <!-- Attendance History -->
     <h3>Attendance Records</h3>
-    <a href="{{ route('employee.showRequestLeave') }}" class="btn btn-primary">Add Request</a>
     <table class="table">
         <thead>
             <tr>
@@ -38,7 +38,6 @@
         @csrf
         <button type="submit" class="btn btn-danger">Check Out</button>
     </form>
-    <a href="{{ route('employee.leaveRequests') }}" class="btn btn-primary">View Request</a>
 </div>
 @endsection
 

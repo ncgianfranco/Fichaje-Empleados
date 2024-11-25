@@ -1,5 +1,6 @@
 <!-- resources/views/employee/requestLeave.blade.php -->
 @extends('layouts.app')
+@extends('employee.employee-layouts.employee-menu')
 
 @section('title-name', 'Requests')
 

@@ -119,10 +119,17 @@ class EmployeeController extends Controller
         
         //Actualizamos el campo días gastados (para que, aunque aún no han sido aprobados, el usuario no pueda seleccionar vacaciones sin control)
         $spent_holidays += $days_requested;
-        $employee->update(['spent_holidays' => $spent_holidays]);
+        
+        //Comprobar qué tipo de leave pidió (vacaciones,sick)
+        
+        if($request->leave_type == "annual"){
+            $employee->update(['spent_holidays' => $spent_holidays]);
+            // Redirect with a success message
+            return redirect()->route('employee.requestLeave')->with('success', 'Leave request submitted successfully.');
+        }
 
-        // Redirect with a success message
-        return redirect()->route('employee.requestLeave')->with('success', 'Leave request submitted successfully.');
+        return redirect()->route('employee.requestLeave');
+
     }
 
     // Method to display the employee`s Leave Request
@@ -147,7 +154,8 @@ class EmployeeController extends Controller
 
         $employee = User::findOrFail($request->user_id);
 
-        $employee->decrement('spent_holidays', $days_requested);
+        if($request->leave_type == "annual")
+            $employee->decrement('spent_holidays', $days_requested);
 
         $request->delete();
 

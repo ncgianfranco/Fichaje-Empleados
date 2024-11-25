@@ -13,18 +13,26 @@
             <div class="container d-flex justify-content-between">
                 <a class="navbar-brand text-warning" href="#">Brand</a>
                 <a href="{{ route('dashboard') }}" class="h2 link-underline link-underline-opacity-0">Time Tracker</a>
-                <button class="navbar-toggler text-secondary" data-toggle="collapse" type="button" aria-expanded="false">
+                <!-- Botón navbar (unido al desplegable por data-bs-targe - id)-->
+                <button class="navbar-toggler text-secondary" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" type="button">
+                    <!-- Icono navbar -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse">
-
+                <!-- Menú desplegable -->
+                <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                    <ul class="navbar-nav text-end">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('dashboard') }}">Dashboard</a>
+                        </li>
+                        @yield('menu-options')
+                        <li class="nav-item border-light border-top">
+                            <a class="nav-link active" href="{{route('logout')}}">Logout</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
-
         @yield('content')
-        
-        <a href="{{route('logout')}}">Logout</a>
         <footer class="footer">
 
         </footer>

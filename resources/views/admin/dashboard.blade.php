@@ -1,18 +1,12 @@
 <!-- resources/views/admin/dashboard.blade.php -->
 @extends('layouts.app')
+@extends('admin.admin-layouts.admin-menu')
 
 @section('title-name', 'Dashboard')
 
 @section('content')
 <div class="container">
     <h2>Admin Dashboard</h2>
-
-    <!-- Employee Management Section -->
-    <h3>Manage Employees</h3>
-    <a href="{{ route('admin.leaveRequests') }}" class="btn btn-primary">Go to view request of employees</a>
-    <a href="{{ route('admin.addEmployee') }}" class="btn btn-primary">Add New Employee</a>
-    <a href="{{ route('admin.performance') }}" class="btn btn-primary">Ver Rendimiento de Empleados</a>
-
     <table class="table">
         <thead>
             <tr>

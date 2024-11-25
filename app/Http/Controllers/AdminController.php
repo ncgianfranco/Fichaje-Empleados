@@ -97,7 +97,7 @@ class AdminController extends Controller
         $leaveRequest->save();
 
         //Actualizamos el campo días gastados si fue rechazada (cuando el empleado hace una petición de vacaciones, cuentan como días gastados a pesar de no haber sido aprobados aún)
-        if($request->status == "rejected"){
+        if($request->status == "rejected" && $leaveRequest->leave_type == "annual"){
             //Calculamos cantidad de días solicitados
             $leaveStartDate = \Carbon\Carbon::parse($leaveRequest->start_date);
             $leaveEndDate = $leaveRequest->end_date;
