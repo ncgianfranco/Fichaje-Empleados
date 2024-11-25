@@ -83,7 +83,7 @@ Sigue estos pasos para instalar y ejecutar el proyecto localmente:
     ```bash
     php artisan serve
     ```
-6. **Acceder a la aplicación: Abre tu navegador y visita http://127.0.0.1:8000.:**
+6. **Acceder a la aplicación: Abre tu navegador y visita http://127.0.0.1:8000:**
 
 ## Notas adicionales
 
@@ -92,6 +92,7 @@ Asegúrate de habilitar el acceso a aplicaciones menos seguras en tu cuenta de G
 Revisa la configuración de tu servidor si experimentas problemas de envío de correos.
 ### Para empleados:
 Usuario administrador: Correo: admin@example.com Contraseña: password
+
 Usuario empleado: Correo: employee@example.com Contraseña: password
 ### Depuración:
 En caso de errores, habilita APP_DEBUG=true en el archivo .env para obtener más información.
@@ -100,7 +101,9 @@ En caso de errores, habilita APP_DEBUG=true en el archivo .env para obtener más
 
 ## Referencias bibliográficas
 [Laravel Framework Documentation](https://laravel.com/docs)
+
 [MySQL Documentation](https://dev.mysql.com/doc/)
+
 [Configuración de SMTP en Gmail: ](https://support.google.com/mail/)
 
 ## Licencia 
