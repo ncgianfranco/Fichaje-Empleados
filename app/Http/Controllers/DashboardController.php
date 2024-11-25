@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -10,11 +9,13 @@ class DashboardController extends Controller
     public function index()
     {
         
-        // Get the currently authenticated user
-        $user = Auth::user();
-
-        // Pass the user data to the dashboard view
-        return view('dashboard', compact('user'));
-        
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard'); // Admin dashboard
+        } else if(Auth::user()->role === 'employee') {
+            return redirect()->route('employee.dashboard'); // Employee dashboard
+        }else{
+            return abort(403); // Unauthorized access
+        }
+    
     }
 }

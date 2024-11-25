@@ -1,48 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login de registro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-    
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-            @error('email')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-    
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" class="form-control">
-            @error('password')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-    
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    
+@extends('layouts.app')
 
-    <a href="{{ route('register')}}">registrarse</a>
-</body>
-</html>
+@section('title-name', 'Login')
+
+@section('content')
+    <div class="container-fluid">
+        <h1 class="text-center">Login</h1>
+        <form class="px-5 py-3" method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div class="container">
+               <div class="row flex justify-content-center mb-3">
+                   <div class="col-lg-6">
+                       <label class="form-label" for="email">Email</label>
+                       <input id="email" class="form-control col-2" type="email" name="email" value="{{ old('email') }}">
+                       @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                       @enderror
+                   </div>
+               </div>
+                <div class="row flex justify-content-center mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label" for="password">Password</label>
+                        <input id = "password" type="password" name="password" class="form-control">
+                        @error('password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row flex justify-content-center mb-3">
+                    <div class="col-lg-6 text-center">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </div>
+                <div class="row flex justify-content-center mb-3">
+                    <div class="col-lg-6 text-center">
+                        <p class="link-underline"> ¿Olvidaste tu contraseña? <a class="link-underline link-underline-opacity-0 link-offset-3-hover link-underline-opacity-75-hover" href="{{ route('password.request')}}"> Recuperar contraseña </a></p>
+                    </div>
+                </div>
+            </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
+        </form>
+    </div>
+@endsection
