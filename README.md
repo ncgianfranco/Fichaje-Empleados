@@ -107,4 +107,8 @@ En caso de errores, habilita APP_DEBUG=true en el archivo .env para obtener más
 [Configuración de SMTP en Gmail: ](https://support.google.com/mail/)
 
 ## Licencia 
+<<<<<<< HEAD
 Este proyecto está licenciado bajo la Licencia MIT.
+=======
+Este proyecto está licenciado bajo la Licencia MIT.
+>>>>>>> c04f3eed2445f054971e1282925aa41bad0e443e
