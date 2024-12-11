@@ -1,11 +1,11 @@
 <!-- resources/views/admin/editEmployee.blade.php -->
 @extends('layouts.app')
-
+@extends('admin.admin-layouts.admin-menu')
 @section('title-name', 'Edit Employee')
 
 @section('content')
 <div class="container">
-    <h2>Edit Employee</h2>
+    <h2>Editar Empleado</h2>
     
     <!-- Display any success or error messages -->
     @if(session('success'))
@@ -29,7 +29,7 @@
 
         <!-- Name Field -->
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">Nombre</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $employee->name) }}" required>
         </div>
 
@@ -39,17 +39,8 @@
             <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $employee->email) }}" required>
         </div>
 
-        <!-- Role Selection Field -->
-        <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <select name="role" id="role" class="form-select" required>
-                <option value="employee" {{ $employee->role === 'employee' ? 'selected' : '' }}>Employee</option>
-                <option value="admin" {{ $employee->role === 'admin' ? 'selected' : '' }}>Admin</option>
-            </select>
-        </div>
-
         <!-- Update Button -->
-        <button type="submit" class="btn btn-primary">Update Employee</button>
+        <button type="submit" class="btn btn-primary">Modificar</button>
     </form>
 </div>
 @endsection

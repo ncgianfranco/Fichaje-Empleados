@@ -6,14 +6,14 @@
 
 @section('content')
 <div class="container">
-    <h2>Admin Dashboard</h2>
+    <h2>Panel Supervisor</h2>
+    <h3>Empleados</h3>
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Empleado</th>
                 <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -21,13 +21,12 @@
                 <tr>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->email }}</td>
-                    <td>{{ $employee->role }}</td>
                     <td>
-                        <a href="{{ route('admin.editEmployee', $employee->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('admin.editEmployee', $employee->id) }}" class="btn btn-warning">Modificar</a>
                         <form action="{{ route('admin.deleteEmployee', $employee->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>
                 </tr>
@@ -36,7 +35,7 @@
     </table>
 
     <!-- Attendance Records Section -->
-    <h3>Attendance Records</h3>
+    <h3>Registros de fichajes</h3>
 
     @if($attendanceRecords->isEmpty())
         <p>No hay fichajes registrados para hoy.</p>
@@ -45,9 +44,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Employee</th>
-                    <th>Clock In</th>
-                    <th>Clock Out</th>
+                    <th>Empleado</th>
+                    <th>Entrada</th>
+                    <th>Salida</th>
                 </tr>
             </thead>
             <tbody>

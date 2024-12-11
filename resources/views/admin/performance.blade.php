@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@extends('admin.admin-layouts.admin-menu')
 @section('title-name', 'Performance Employees')
 
 @section('content')
@@ -45,8 +45,8 @@
             <thead>
                 <tr>
                     <th>Empleado</th>
-                    <th>Clock In</th>
-                    <th>Clock Out</th>
+                    <th>Entrada</th>
+                    <th>Salida</th>
                     <th>Horas Trabajadas</th>
                 </tr>
             </thead>

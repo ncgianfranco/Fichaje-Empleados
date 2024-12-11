@@ -6,16 +6,16 @@
 
 @section('content')
 <div class="container">
-    <h2>Employee Dashboard</h2>
+    <h2>Panel Empleado</h2>
 
-    <!-- Attendance History -->
-    <h3>Attendance Records</h3>
+    <!-- Registros de Asistencia -->
+    <h3>Registros de Asistencia</h3>
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Clock In</th>
-                <th>Clock Out</th>
+                <th>Fecha</th>
+                <th>Entrada</th>
+                <th>Salida</th>
             </tr>
         </thead>
         <tbody>
@@ -32,11 +32,11 @@
     <!-- Check In/Out Buttons -->
     <form action="{{ route('employee.checkin') }}" method="POST">
         @csrf
-        <button type="submit" class="btn btn-success">Check In</button>
+        <button type="submit" class="btn btn-success">Fichar</button>
     </form>
     <form action="{{ route('employee.checkout') }}" method="POST">
         @csrf
-        <button type="submit" class="btn btn-danger">Check Out</button>
+        <button type="submit" class="btn btn-danger">Fichar Salida</button>
     </form>
 </div>
 @endsection

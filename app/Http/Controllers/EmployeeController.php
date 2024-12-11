@@ -125,10 +125,10 @@ class EmployeeController extends Controller
         if($request->leave_type == "annual"){
             $employee->update(['spent_holidays' => $spent_holidays]);
             // Redirect with a success message
-            return redirect()->route('employee.requestLeave')->with('success', 'Leave request submitted successfully.');
+            return redirect()->route('employee.requestLeave')->with('success', 'Peticion enviada.');
         }
 
-        return redirect()->route('employee.requestLeave');
+        return redirect()->route('employee.requestLeave')->with('success', 'Peticion enviada.');
 
     }
 
@@ -159,7 +159,7 @@ class EmployeeController extends Controller
 
         $request->delete();
 
-        return redirect()->route('employee.leaveRequests')->with('success', 'Request deleted successfully.');
+        return redirect()->route('employee.leaveRequests')->with('success', 'Peticion borrada.');
     }
 
 }
