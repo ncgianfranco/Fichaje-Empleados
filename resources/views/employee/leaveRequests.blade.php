@@ -6,23 +6,23 @@
 
 @section('content')
 <div class="container">
-    <h2>Your Leave Requests</h2>
+    <h2>Peticiones Realizadas</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     @if($leaveRequests->isEmpty())
-        <p>You have no leave requests.</p>
+        <p>No tienes peticiones pendientes.</p>
     @else
         <table class="table">
             <thead>
                 <tr>
-                    <th>Leave Type</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
-                    <th>Request Date</th>
+                    <th>Tipo de petición</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Final</th>
+                    <th>Estado</th>
+                    <th>Solicitado</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,11 +33,11 @@
                         <td>{{ $request->end_date }}</td>
                         <td>
                             @if($request->status === 'pending')
-                                <span class="badge bg-warning text-dark">Pending</span>
+                                <span class="badge bg-warning text-dark">Pendiente</span>
                             @elseif($request->status === 'approved')
-                                <span class="badge bg-success">Approved</span>
+                                <span class="badge bg-success">Aprovada</span>
                             @elseif($request->status === 'rejected')
-                                <span class="badge bg-danger">Rejected</span>
+                                <span class="badge bg-danger">Rechazada</span>
                             @endif
                         </td>
                         <td>{{ $request->created_at->format('Y-m-d') }}</td>

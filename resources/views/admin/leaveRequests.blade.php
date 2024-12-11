@@ -1,11 +1,11 @@
 <!-- resources/views/admin/leaveRequests.blade.php -->
 @extends('layouts.app')
-
+@extends('admin.admin-layouts.admin-menu')
 @section('title-name', 'Requests')
 
 @section('content')
 <div class="container">
-    <h2>Employee Leave Requests</h2>
+    <h2>Peticiones Empleados</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -13,23 +13,23 @@
 
     <form action="{{ route('admin.leaveRequestsSearch') }}" method="get">
         @csrf
-        <label for="employee_email">Employee email:</label>
+        <label for="employee_email">Filtrar</label>
         <input type="text" id="employee_email" name="employee_email">
-        <button type="submit"  name="employee_email_button">Search</button>
+        <button type="submit"  name="employee_email_button">Buscar</button>
     </form>
 
     @if($leaveRequests->isEmpty())
-        <p>No leave requests available.</p>
+        <p>No hay peticiones disponibles.</p>
     @else
         <table class="table">
             <thead>
                 <tr>
-                    <th>Employee Name</th>
-                    <th>Leave Type</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Nombre</th>
+                    <th>Tipo de petición</th>
+                    <th>Inicio</th>
+                    <th>Hasta</th>
+                    <th>Estado</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -45,8 +45,8 @@
                                 @csrf
                                 @method('PUT')
                                 <select name="status" class="form-select">
-                                    <option value="approved" {{ $request->status === 'approved' ? 'selected' : '' }}>Approve</option>
-                                    <option value="rejected" {{ $request->status === 'rejected' ? 'selected' : '' }}>Reject</option>
+                                    <option value="approved" {{ $request->status === 'approved' ? 'selected' : '' }}>Aprobado</option>
+                                    <option value="rejected" {{ $request->status === 'rejected' ? 'selected' : '' }}>Rechazado</option>
                                 </select>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
