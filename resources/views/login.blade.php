@@ -53,3 +53,7 @@
         </form>
     </div>
 @endsection
+
+@section('scripts')
+<script src="{{ asset('js/hideMenu.js') }}"></script>
+@endsection

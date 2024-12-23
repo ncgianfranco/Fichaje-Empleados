@@ -13,8 +13,8 @@
             <div class="container d-flex justify-content-between">
                 <a class="navbar-brand text-warning" href="#">" "</a>
                 <a href="{{ route('dashboard') }}" class="h2 link-underline link-underline-opacity-0">Time Tracker</a>
-                <!-- Botón navbar (unido al desplegable por data-bs-targe - id)-->
-                <button class="navbar-toggler text-secondary" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" type="button">
+                <!-- Botón navbar (unido al desplegable por data-bs-target - id)-->
+                <button id="menuBurgerButton" class="navbar-toggler text-secondary" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" type="button">
                     <!-- Icono navbar -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,5 +36,6 @@
         <footer class="footer">
 
         </footer>
+        @yield('scripts')
     </body>
 </html>
