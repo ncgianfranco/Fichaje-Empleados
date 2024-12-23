@@ -32,12 +32,21 @@
     <!-- Check In/Out Buttons -->
     <form action="{{ route('employee.checkin') }}" method="POST">
         @csrf
-        <button type="submit" class="btn btn-success">Fichar</button>
+        <button type="button" onclick="setCurrentTime('confirmModalCheckIn')" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmModalCheckIn">Fichar</button>
+        <x-popup button="check-in" title="¿Realizar check in?" body="Se registrará a las" target="confirmModalCheckIn">
+            <span class="check-time"></span>
+        </x-popup>
     </form>
     <form action="{{ route('employee.checkout') }}" method="POST">
         @csrf
-        <button type="submit" class="btn btn-danger">Fichar Salida</button>
+        <button type="button" onclick="setCurrentTime('confirmModalCheckOut')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModalCheckOut">Fichar Salida</button>
+        <x-popup button="check-out" title="¿Realizar check out?" body="Se registrará a las" target="confirmModalCheckOut">
+            <span class="check-time"></span>
+        </x-popup>
     </form>
 </div>
 @endsection
 
+@section('scripts')
+<script src="{{ asset('js/currentTime.js') }}"></script>
+@endsection
