@@ -35,6 +35,7 @@
         <input id="password_confirmation" type="password" name="password_confirmation"/>
     </div>
 
-    <button type="submit">Crear Empleado</button>
+    <button type="button" value="Crear Empleado" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModalAddEmployee">Crear Empleado</button>
+    <x-popup title="¿Crear usuario?" body="Se creará el usuario con los datos introducidos" target="confirmModalAddEmployee" />
 </form>
 @endsection

@@ -8,7 +8,6 @@ use Illuminate\View\Component;
 
 class Popup extends Component
 {
-    public $button;
     public $target;
     public $title;
     public $body;
@@ -16,9 +15,8 @@ class Popup extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($button, $title, $body, $target)
+    public function __construct($title, $body, $target)
     {
-        $this->button = $button;
         $this->title = $title;
         $this->body = $body;
         $this->target= $target;
