@@ -26,7 +26,9 @@
                         <form action="{{ route('admin.deleteEmployee', $employee->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <!-- Añadimos el id de la petición al identificador del modal para que cada uno sea único -->
+                            <button type="button" value="Eliminar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModalDeleteUser{{ $employee->id }}">Eliminar</button>
+                            <x-popup title="¿Eliminar el usuario {{$employee->email}}?" body="Se perderán todos sus datos" target="confirmModalDeleteUser{{ $employee->id }}" />
                         </form>
                     </td>
                 </tr>

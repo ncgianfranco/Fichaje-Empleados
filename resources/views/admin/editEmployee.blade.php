@@ -40,7 +40,8 @@
         </div>
 
         <!-- Update Button -->
-        <button type="submit" class="btn btn-primary">Modificar</button>
+        <button type="button" value="Modificar" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModalModifyUser">Modificar</button>
+        <x-popup title="¿Guardar modificaciones?" body="Se sobreescribirán los datos anteriores" target="confirmModalModifyUser" />
     </form>
 </div>
 @endsection

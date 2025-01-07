@@ -45,7 +45,9 @@
                             <form action="{{ route('employee.deleteLeaveRequest', $request->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" value="Cancelar">
+                                <!-- Añadimos el id de la petición al identificador del modal para que cada uno sea único -->
+                                <button type="button" value="Cancelar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModalCancelRequest{{ $request->id }}">Cancelar</button>
+                                <x-popup title="¿Cancelar petición?" body="Se cancelará la petición y se devolverán los días solicitados" target="confirmModalCancelRequest{{ $request->id }}" />
                             </form>
                         </td>
                     </tr>

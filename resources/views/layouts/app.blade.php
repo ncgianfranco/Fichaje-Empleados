@@ -26,7 +26,12 @@
                         </li>
                         @yield('menu-options')
                         <li class="nav-item border-light border-top">
-                            <a class="nav-link active" href="{{route('logout')}}">Logout</a>
+                            <form action="{{route('logout')}}" method="GET">
+                                @csrf
+                                @method('DELETE')
+                                <a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#confirmModalLogout">Logout</a>
+                                <x-popup title="¿Cerrar la sesión?" body="Se perderán los procesos sin terminar" target="confirmModalLogout" />
+                            </form>
                         </li>
                     </ul>
                 </div>
