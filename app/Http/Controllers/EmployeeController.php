@@ -7,6 +7,7 @@ use App\Models\LeaveRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 define('HOLIDAYS_AMOUNT', 30);
 
 
@@ -21,29 +22,42 @@ class EmployeeController extends Controller
 
     public function checkIn()
     {
-        $attendance = new AttendanceLog();
+        // Verificar si ya se ha fichado entrada hoy
+        $todayAttendance = AttendanceLog::where('user_id', Auth::id())
+            ->whereDate('created_at', Carbon::today())
+            ->first();
+    
+        if ($todayAttendance && $todayAttendance->clock_in_time) {
+            return redirect()->route('employee.dashboard')->with('error', 'Ya has fichado entrada hoy.');
+        }
+    
+        // Crear un nuevo registro de asistencia
+        $attendance = $todayAttendance ?: new AttendanceLog();
         $attendance->user_id = Auth::id();
         $attendance->clock_in_time = now();
         $attendance->save();
-
-        return redirect()->route('employee.dashboard')->with('success', 'Checked in successfully.');
-
+    
+        return redirect()->route('employee.dashboard')->with('success', 'Entrada fichada exitosamente a las ' . $attendance->clock_in_time->format('H:i'));
     }
 
     public function checkOut()
     {
+        // Buscar el registro de hoy para fichar salida
         $attendance = AttendanceLog::where('user_id', Auth::id())
-            ->whereNull('clock_out_time')
-            ->latest()
+            ->whereDate('created_at', Carbon::today())
+            ->whereNotNull('clock_in_time') // Asegurarnos de que existe un registro de entrada
+            ->whereNull('clock_out_time')  // Solo permitir si no se ha registrado la salida
             ->first();
 
-        if ($attendance) {
-            $attendance->clock_out_time = now();
-            $attendance->save();
-            return redirect()->route('employee.dashboard')->with('success', 'Checked out successfully.');
+        if (!$attendance) {
+            return redirect()->route('employee.dashboard')->with('error', 'Primero debes fichar entrada.');
         }
 
-        return redirect()->route('employee.dashboard')->with('error', 'You need to check in first.');
+        // Registrar la hora de salida
+        $attendance->clock_out_time = now();
+        $attendance->save();
+
+        return redirect()->route('employee.dashboard')->with('success', 'Salida fichada exitosamente a las ' . $attendance->clock_out_time->format('H:i'));
     }
 
     // show the requestLeave form
