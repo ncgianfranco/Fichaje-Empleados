@@ -12,13 +12,16 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        
-        $employees = User::where('role', 'employee')->get(); // Fetch all employees
-        // Obtén la fecha de hoy
-        $today = now()->toDateString(); // 'Y-m-d' formato de la fecha de hoy
-
-        // Fetch attendance logs along with associated user details
-        $attendanceRecords = AttendanceLog::whereDate('clock_in_time', $today)->get();
+        // Paginación de empleados
+        $employees = User::where('role', 'employee')->paginate(10); // Paginamos los empleados de 10 en 10
+    
+        // Obtener la fecha de hoy
+        $today = now()->toDateString();
+    
+        // Paginación de registros de fichaje
+        $attendanceRecords = AttendanceLog::whereDate('clock_in_time', $today)->paginate(10); // Paginación para los registros de hoy
+    
+        // Pasamos los datos a la vista
         return view('admin.dashboard', compact('employees', 'attendanceRecords'));
     }
 
@@ -43,7 +46,7 @@ class AdminController extends Controller
             'role' => 'employee',
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Employee added successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'Empleado creado correctamente.');
     }
 
 
@@ -60,7 +63,7 @@ class AdminController extends Controller
         $employee = User::findOrFail($id);
         $employee->update($request->only(['name', 'email']));
 
-        return redirect()->route('admin.dashboard')->with('success', 'Employee updated successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'Empleado actualizado correctamente.');
     }
 
     //  delete employee
@@ -69,7 +72,7 @@ class AdminController extends Controller
         $employee = User::findOrFail($id);
         $employee->delete();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Employee deleted successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'Empleado eliminado correctamente.');
     }
 
     // display all employee leave request
@@ -110,7 +113,7 @@ class AdminController extends Controller
         }
 
         // Redirect back with a success message
-        return redirect()->route('admin.leaveRequests')->with('success', 'Leave request status updated successfully');
+        return redirect()->route('admin.leaveRequests')->with('success', 'Peticion actualizada');
     }
 
     public function searchEmployeeRequests(Request $request) {

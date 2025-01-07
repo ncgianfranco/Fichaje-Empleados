@@ -1,14 +1,14 @@
-<!-- resources/views/admin/dashboard.blade.php -->
 @extends('layouts.app')
 @extends('admin.admin-layouts.admin-menu')
-
 @section('title-name', 'Dashboard')
 
 @section('content')
 <div class="container">
     <h2>Panel Supervisor</h2>
+
+    <!-- Sección de empleados con paginación -->
     <h3>Empleados</h3>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Empleado</th>
@@ -34,14 +34,19 @@
         </tbody>
     </table>
 
-    <!-- Attendance Records Section -->
+    <!-- Paginación para empleados -->
+    <div class="d-flex justify-content-center">
+        {{ $employees->links() }}
+    </div>
+
+    <!-- Sección de Registros de fichajes -->
     <h3>Registros de fichajes</h3>
 
     @if($attendanceRecords->isEmpty())
         <p>No hay fichajes registrados para hoy.</p>
     @else
 
-        <table class="table">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Empleado</th>
@@ -59,7 +64,12 @@
                 @endforeach
             </tbody>
         </table>
-        
+
+        <!-- Paginación para registros de fichaje -->
+        <div class="d-flex justify-content-center">
+            {{ $attendanceRecords->links() }}
+        </div>
+
     @endif
 </div>
 @endsection
