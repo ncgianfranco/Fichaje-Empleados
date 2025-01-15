@@ -13,13 +13,13 @@ class AdminController extends Controller
     public function dashboard()
     {
         // Paginación de empleados
-        $employees = User::where('role', 'employee')->paginate(10); // Paginamos los empleados de 10 en 10
+        $employees = User::where('role', 'employee')->get(); // Paginamos los empleados de 10 en 10
     
         // Obtener la fecha de hoy
         $today = now()->toDateString();
     
         // Paginación de registros de fichaje
-        $attendanceRecords = AttendanceLog::whereDate('clock_in_time', $today)->paginate(10); // Paginación para los registros de hoy
+        $attendanceRecords = AttendanceLog::whereDate('clock_in_time', $today)->get(); // Paginación para los registros de hoy
     
         // Pasamos los datos a la vista
         return view('admin.dashboard', compact('employees', 'attendanceRecords'));

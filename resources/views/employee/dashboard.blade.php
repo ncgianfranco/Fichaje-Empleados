@@ -1,4 +1,3 @@
-<!-- resources/views/employee/dashboard.blade.php -->
 @extends('layouts.app')
 @extends('employee.employee-layouts.employee-menu')
 
@@ -28,8 +27,13 @@
         <div class="card-body text-center">
             <p><strong>Hora de Entrada:</strong> 
                 <span class="text-success">
-                    @if($attendanceRecords->where('created_at', '>=', now()->startOfDay())->where('created_at', '<=', now()->endOfDay())->first()->clock_in_time)
-                        {{ $attendanceRecords->where('created_at', '>=', now()->startOfDay())->where('created_at', '<=', now()->endOfDay())->first()->clock_in_time }}
+                    @php
+                        $todayRecord = $attendanceRecords->where('created_at', '>=', now()->startOfDay())
+                                                         ->where('created_at', '<=', now()->endOfDay())
+                                                         ->first();
+                    @endphp
+                    @if($todayRecord && $todayRecord->clock_in_time)
+                        {{ $todayRecord->clock_in_time }}
                     @else
                         No registrada
                     @endif
@@ -38,8 +42,8 @@
             
             <p><strong>Hora de Salida:</strong> 
                 <span class="text-danger">
-                    @if($attendanceRecords->where('created_at', '>=', now()->startOfDay())->where('created_at', '<=', now()->endOfDay())->first()->clock_out_time)
-                        {{ $attendanceRecords->where('created_at', '>=', now()->startOfDay())->where('created_at', '<=', now()->endOfDay())->first()->clock_out_time }}
+                    @if($todayRecord && $todayRecord->clock_out_time)
+                        {{ $todayRecord->clock_out_time }}
                     @else
                         No registrada
                     @endif
@@ -48,11 +52,17 @@
             <!-- Botones para Fichar Entrada y Salida -->
             <form action="{{ route('employee.checkin') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-success w-50 mb-2">Fichar Entrada</button>
+                <button type="button" onclick="setCurrentTime('confirmModalCheckIn')" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmModalCheckIn">Fichar</button>
+                <x-popup button="check-in" title="¿Realizar check in?" body="Se registrará a las" target="confirmModalCheckIn">
+                    <span class="check-time"></span>
+                </x-popup> 
             </form>
             <form action="{{ route('employee.checkout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger w-50">Fichar Salida</button>
+                <button type="button" onclick="setCurrentTime('confirmModalCheckOut')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModalCheckOut">Fichar Salida</button>
+                <x-popup button="check-out" title="¿Realizar check out?" body="Se registrará a las" target="confirmModalCheckOut">
+                    <span class="check-time"></span>
+                </x-popup>
             </form>   
         </div>
     </div>
@@ -84,6 +94,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{asset('js/currentTime.js')}}"></script>
 <script>
     // Mostrar/ocultar registros pasados
     document.getElementById('toggleRecords').addEventListener('click', function () {
@@ -98,3 +109,4 @@
     });
 </script>
 @endsection
+

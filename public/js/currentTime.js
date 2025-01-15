@@ -6,4 +6,3 @@ function setCurrentTime(modalId){
     var checkTimeSpan = modal.querySelectorAll(".check-time")[0];
     checkTimeSpan.innerText=horaActual + "h";
 }
-

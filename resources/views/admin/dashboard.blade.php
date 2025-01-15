@@ -37,9 +37,9 @@
     </table>
 
     <!-- Paginación para empleados -->
-    <div class="d-flex justify-content-center">
+    {{-- <div>
         {{ $employees->links() }}
-    </div>
+    </div> --}}
 
     <!-- Sección de Registros de fichajes -->
     <h3>Registros de fichajes</h3>
@@ -68,11 +68,17 @@
         </table>
 
         <!-- Paginación para registros de fichaje -->
-        <div class="d-flex justify-content-center">
+        {{-- <div>
             {{ $attendanceRecords->links() }}
-        </div>
+        </div> --}}
 
     @endif
 </div>
 @endsection
-
+@section('styles')
+    <style>
+        svg {
+            display: none;
+        }
+    </style>
+@endsection
